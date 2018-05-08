@@ -1,35 +1,84 @@
 body{
     background-color: bisque;
     font-family: serif;
- 
+    
 }
 
+#seattle{
+    /* border: black 2px dotted; */
+    position: fixed;
+   width: 60%;
+   height:60%;
+   bottom: 0px;
+   z-index: -1;
+}
 .storeName {
     font-size: 24px;
     text-decoration: black underline;
 }
 
-ul {
+#storeH{
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 200%;
+    /* border: black 1px dotted; */
+    text-decoration: underline;
+  
+    width: 40%;
+    position: absolute;
+    left: 58%;
+    top: 50%
+}
+
+#storeUL{
+    
+    list-style: disc;
+    position: absolute;
+    left: 70%;
+    display: block;
+    font-size: 140%;
+    font-family: 'Indie Flower', cursive;
+}
+
+#navBar {
+    /* border: black 2px dotted; */
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+    /* margin-left: auto;
+    margin-right: auto; */
+    list-style-type: none;
+    margin: 25px auto;
+    padding: 0;
+    text-align: center;
+    width: 200px;
+    /* background-color: #f1f1f1; */
+    z-index: +1;
+}
+
+
+li a {
+    
+
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    background-color: #dddddd;
+    padding: 8px 16px;
+    z-index: +1;
+}
+
+li a:hover{
+    background-color: #555;
+    color: white;
 }
 
 ls {
     text-align: center
 }
 ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-li a {
-    display: block;
-    width: 60px;
-    background-color: #dddddd;
-}
 
 #firstSalmon {
     /* transform: rotate(-90deg); */
@@ -44,3 +93,15 @@ li a {
     margin-left: 100px;
     margin-top: 0px;
 } */
+
+#welcome {
+    text-align: center;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 300%;
+}
+
+#introP {
+    text-align: center;
+    font-family: 'Indie Flower', cursive;
+    font-size: 150%
+}
