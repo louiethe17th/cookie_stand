@@ -1,0 +1,46 @@
+body{
+    background-color: bisque;
+    font-family: serif;
+ 
+}
+
+.storeName {
+    font-size: 24px;
+    text-decoration: black underline;
+}
+
+ul {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ls {
+    text-align: center
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+li a {
+    display: block;
+    width: 60px;
+    background-color: #dddddd;
+}
+
+#firstSalmon {
+    /* transform: rotate(-90deg); */
+    display:block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 50%;
+
+}
+/* #secondSalmon {
+    transform: rotate(-90deg);
+    margin-left: 100px;
+    margin-top: 0px;
+} */
