@@ -6,9 +6,14 @@ body{
     font-family: serif;
     
 }
-
+@keyframes fadeIn{
+    from{opacity: 0;}
+    to{opacity: 1;}
+}
 #seattle{
     /* border: black 2px dotted; */
+    animation-name: fadeIn;
+    animation-duration: 4s;
     position: fixed;
    width: 60%;
    height:60%;
@@ -59,16 +64,20 @@ body{
     z-index: +1;
 }
 
+#navButtonsHome{
+}
+
 
 li a {
     
-
+    color: black;
     text-align: center;
     display: block;
     text-decoration: none;
     background-color: #dddddd;
     padding: 8px 16px;
     z-index: +1;
+    border: white outset 5px;
 }
 
 li a:hover{
@@ -117,17 +126,15 @@ ul {
 }
 
 table{
-    font-family: 'IBM Plex Mono', monospacel;
+    font-family: 'IBM Plex Mono', monospace;
 
     padding:300px;
     margin: auto;
 }
 td {
-    background-color: white;
     padding: 10px;
     margin: 20px;
     
-    border: black solid 2px;
     
 }
 
@@ -137,13 +144,28 @@ tr{
 
 .storeTableNames{
     text-decoration: underline;
+    width: 40px;
+    background-color: bisque
     /* position: absolute; */
     /* margin-left: 0px; */
 }
 
 #airPlane{
+    animation-name: fadeIn;
+    animation-duration: 4s;
     width: 20%;
     position: fixed;
-    bottom: 0px;
-    right: 0px;
+    bottom: 65px;
+    right: 75px;
+    z-index: -1;
+}
+
+.tableNumbers{
+    border: white outset 5px;
+    background-color: #dddddd;
+    
+}
+
+.tableHours{
+    background-color: bisque;
 }

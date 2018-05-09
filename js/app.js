@@ -2,7 +2,7 @@
 
 
 //creates array for times of day
-var hours = ['6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00']
+var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm']
 
 //creates array to hold store names
 var allStores = [];
@@ -29,14 +29,15 @@ new Store('Capital Hill', 20, 38, 2.3);
 new Store('Alki', 2, 16, 4.6);
 
 Store.prototype.header = function () {
-
+    
     var trEl = document.createElement('tr');
     var thEl = document.createElement('th');
- 
+    
     for(var i in hours) {
+        thEl.className = ('tableHours');
         thEl.textContent = hours[i];
-    trEl.appendChild(thEl);
-    thEl = document.createElement('th');
+        trEl.appendChild(thEl);
+        thEl = document.createElement('th');
     }
  
     storesTable.appendChild(trEl);
@@ -91,6 +92,7 @@ Store.prototype.render = function() {
     this.cookPerHourFunct();
   
     var trEl = document.createElement('tr');
+    trEl.className = ('tableNumbers');
     var tdEl = document.createElement('td');
 
     
