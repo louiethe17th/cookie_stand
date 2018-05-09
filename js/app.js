@@ -1,473 +1,166 @@
-'use strict';
-
-var hours = ['6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00']
-
-var firstAndPike = {
-    name: 'First and pike',
-    minCust: 23,
-    maxCust: 65,
-    aveSale: 6.3,
-    hourlyCust: [],
-    hourlyCookies: [],
-    totalCookies: 0,
+'use strict'
 
 
+//creates array for times of day
+var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm']
+
+//creates array to hold store names
+var allStores = [];
+
+var storesTable = document.getElementById('salesTable');
+
+//creates empty object to hole store data
+function Store(name, minimumCustomer, maximumCustomer, aveSale){
+    this.name = name;
+    this.minimumCustomer = minimumCustomer;
+    this.maximumCustomer = maximumCustomer;
+    this.aveSale = aveSale;
+    this.customerArray = [];
+    this.cookieArray = [];
+    this.totalCookies = 0;
     
-};
-
-// console.log('done');
-
-firstAndPike.hourlyCustAmm = function(){
-    for ( var i = 0; i < hours.length; i++){
-    var custEveryHour = Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
-    this.hourlyCust.push(custEveryHour)
-    }
-},
-
-firstAndPike.hourlyCookiesAmm = function(){
-    this.hourlyCustAmm();
-    for ( var i = 0; i < hours.length; i++){
-        var oneHourCookies = Math.floor(this.hourlyCust[i] * this.aveSale)
-        this.hourlyCookies.push(oneHourCookies)
-        this.totalCookies += oneHourCookies;
-    }
-
-
+    
+    allStores.push(this);
 }
-     firstAndPike.render = function () {
+new Store('Pike Place Market', 23, 65, 6.3);
+new Store('SeaTac Airport', 3, 24, 1.2);
+new Store('Seattle Center', 11, 38, 3.7);
+new Store('Capital Hill', 20, 38, 2.3);
+new Store('Alki', 2, 16, 4.6);
+
+Store.prototype.header = function () {
+    
+    var trEl = document.createElement('tr');
+    var thEl = document.createElement('th');
+    
+    for(var i in hours) {
+        thEl.className = ('tableHours');
+        thEl.textContent = hours[i];
+        trEl.appendChild(thEl);
+        thEl = document.createElement('th');
+    }
+ 
+    storesTable.appendChild(trEl);
+  }
+
+
+
+// Store.prototype.cookieCalc = function(){
+//     for (var i =0; i < 16; i++)
+//             var cookiesPerHour = Math.floor(this.customerArray[i] * this.aveSale)
+//             this.cookieArray.push(this.cookiesPerHour)
+//             this.totalCookies += this.cookiesPerHour;
+//         }
+        
+        Store.prototype.custPerHourFunct = function() {
+            for ( var i = 0; i < hours.length; i++) {
+                var random = Math.floor(Math.random() * (this.maximumCustomer - this.minimumCustomer + 1)) + this.minimumCustomer;
+                console.log(random);
+                this.customerArray.push(random);
+                }
+            }
          
-        var storeName = document.getElementById('salesList')
-        var newH = document.createElement('li');
-        newH.className = ('storeName')
-        newH.textContent = this.name;
-        storeName.appendChild(newH)
-        
-        
-        var list = document.getElementById('salesList');
-         this.hourlyCookiesAmm();
-         for ( var i = 0; i < this.hourlyCookies.length; i++){
-             var newLi = document.createElement('li');
-             newLi.textContent = hours[i] + '- ' + this.hourlyCookies[i] + ' cookies';
-             list.appendChild(newLi);
-            
-        };
-        var listContent = document.createElement('li');
-      listContent.textContent = 'Total: ' + this.totalCookies + ' cookies';
-      newLi.appendChild(listContent);
+         Store.prototype.cookPerHourFunct = function() {
+            this.custPerHourFunct();
+            for ( var j = 0; j < hours.length; j++) {
+                var arrayTimesAvg = Math.floor(this.customerArray[j] * this.aveSale);
+                this.cookieArray.push(arrayTimesAvg);
+                this.totalCookies += arrayTimesAvg;
+                }
+            }
 
+
+Store.prototype.renderName = function () {
+    this.cookPerHourFunct();
+    
+    var trEl = document.createElement('tr');
+    var tdEl = document.createElement('td');
+    
+    tdEl.textContent = this.name;
+    trEl.appendChild(tdEl);
+    tdEl = document.createElement('td');
+ 
+    
+    storeTable.appendChild(trEl);
+ }
+    
+  
+
+
+
+Store.prototype.render = function() {
+    this.cookPerHourFunct();
+  
+    var trEl = document.createElement('tr');
+    trEl.className = ('tableNumbers');
+    var tdEl = document.createElement('td');
+
+    
+    for(var i in hours){
+    tdEl.textContent = this.cookieArray[i];
+    trEl.appendChild(tdEl);
+    tdEl =  document.createElement('td')
     }
 
-//================================================================================
-
-    var SeaTacAirport = {
-        name: 'SeaTac Airport',
-        minCust: 3,
-        maxCust: 24,
-        aveSale: 1.2,
-        hourlyCust: [],
-        hourlyCookies: [],
-        totalCookies: 0,
-    
-    
-        
-    };
-    
-    // console.log('done');
-    
-    SeaTacAirport.hourlyCustAmm = function(){
-        for ( var i = 0; i < hours.length; i++){
-        var custEveryHour = Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
-        this.hourlyCust.push(custEveryHour)
-        }
-    },
-    
-    SeaTacAirport.hourlyCookiesAmm = function(){
-        this.hourlyCustAmm();
-        for ( var i = 0; i < hours.length; i++){
-            var oneHourCookies = Math.floor(this.hourlyCust[i] * this.aveSale)
-            this.hourlyCookies.push(oneHourCookies)
-            this.totalCookies += oneHourCookies;
-        }
-    
-    
-    }
-         SeaTacAirport.render = function () {
-             
-            var storeName = document.getElementById('salesList')
-            var newH = document.createElement('li');
-            newH.className = ('storeName')
-            newH.textContent = this.name;
-            storeName.appendChild(newH)
-            
-            
-            var list = document.getElementById('salesList');
-             this.hourlyCookiesAmm();
-            var nameLi = document.createElement('li');
-            nameLi.textContent = this.name;
-             for ( var i = 0; i < this.hourlyCookies.length; i++){
-                 var newLi = document.createElement('li');
-                 newLi.textContent = hours[i] + '- ' + this.hourlyCookies[i] + ' cookies';
-                 list.appendChild(newLi);
-                
-            };
-            var listContent = document.createElement('li');
-          listContent.textContent = 'Total: ' + this.totalCookies + ' cookies';
-          newLi.appendChild(listContent);
-    
-        }
-
- SeaTacAirport.hourlyCustAmm = function(){
-        for ( var i = 0; i < hours.length; i++){
-        var custEveryHour = Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
-        this.hourlyCust.push(custEveryHour)
-        }
-    },
-    
-    SeaTacAirport.hourlyCookiesAmm = function(){
-        this.hourlyCustAmm();
-        for ( var i = 0; i < hours.length; i++){
-            var oneHourCookies = Math.floor(this.hourlyCust[i] * this.aveSale)
-            this.hourlyCookies.push(oneHourCookies)
-            this.totalCookies += oneHourCookies;
-        }
-    
-    
-    }
-         SeaTacAirport.render = function () {
-             
-            var storeName = document.getElementById('salesList')
-            var newH = document.createElement('li');
-            newH.className = ('storeName')
-            newH.textContent = this.name;
-            storeName.appendChild(newH)
-            
-            
-            var list = document.getElementById('salesList');
-             this.hourlyCookiesAmm();
-            var nameLi = document.createElement('li');
-            nameLi.textContent = this.name;
-             for ( var i = 0; i < this.hourlyCookies.length; i++){
-                 var newLi = document.createElement('li');
-                 newLi.textContent = hours[i] + '- ' + this.hourlyCookies[i] + ' cookies';
-                 list.appendChild(newLi);
-                
-            };
-            var listContent = document.createElement('li');
-          listContent.textContent = 'Total: ' + this.totalCookies + ' cookies';
-          newLi.appendChild(listContent);
-    
-        }
-
-//================================================================================
-
-var seattleCenter = {
-    name: 'Seattle Center',
-    minCust: 11,
-    maxCust: 38,
-    aveSale: 3.7,
-    hourlyCust: [],
-    hourlyCookies: [],
-    totalCookies: 0,
-
-
-    
-};
-
-// console.log('done');
-
-seattleCenter.hourlyCustAmm = function(){
-    for ( var i = 0; i < hours.length; i++){
-    var custEveryHour = Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
-    this.hourlyCust.push(custEveryHour)
-    }
-},
-
-seattleCenter.hourlyCookiesAmm = function(){
-    this.hourlyCustAmm();
-    for ( var i = 0; i < hours.length; i++){
-        var oneHourCookies = Math.floor(this.hourlyCust[i] * this.aveSale)
-        this.hourlyCookies.push(oneHourCookies)
-        this.totalCookies += oneHourCookies;
-    }
-
-
+    storesTable.appendChild(trEl);
 }
-     seattleCenter.render = function () {
-         
-        var storeName = document.getElementById('salesList')
-        var newH = document.createElement('li');
-        newH.className = ('storeName')
-        newH.textContent = this.name;
-        storeName.appendChild(newH)
-        
-        
-        var list = document.getElementById('salesList');
-         this.hourlyCookiesAmm();
-        var nameLi = document.createElement('li');
-        nameLi.textContent = this.name;
-         for ( var i = 0; i < this.hourlyCookies.length; i++){
-             var newLi = document.createElement('li');
-             newLi.textContent = hours[i] + '- ' + this.hourlyCookies[i] + ' cookies';
-             list.appendChild(newLi);
-            
-        };
-        var listContent = document.createElement('li');
-      listContent.textContent = 'Total: ' + this.totalCookies + ' cookies';
-      newLi.appendChild(listContent);
 
-    }
-
-seattleCenter.hourlyCustAmm = function(){
-    for ( var i = 0; i < hours.length; i++){
-    var custEveryHour = Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
-    this.hourlyCust.push(custEveryHour)
-    }
-},
-
-seattleCenter.hourlyCookiesAmm = function(){
-    this.hourlyCustAmm();
-    for ( var i = 0; i < hours.length; i++){
-        var oneHourCookies = Math.floor(this.hourlyCust[i] * this.aveSale)
-        this.hourlyCookies.push(oneHourCookies)
-        this.totalCookies += oneHourCookies;
-    }
-
-
+function renderAllStores() {
+   for (var i in allStores) {
+     allStores[i].render();
+  }
 }
-     seattleCenter.render = function () {
-         
-        var storeName = document.getElementById('salesList')
-        var newH = document.createElement('li');
-        newH.className = ('storeName')
-        newH.textContent = this.name;
-        storeName.appendChild(newH)
-        
-        
-        var list = document.getElementById('salesList');
-         this.hourlyCookiesAmm();
-        var nameLi = document.createElement('li');
-        nameLi.textContent = this.name;
-         for ( var i = 0; i < this.hourlyCookies.length; i++){
-             var newLi = document.createElement('li');
-             newLi.textContent = hours[i] + '- ' + this.hourlyCookies[i] + ' cookies';
-             list.appendChild(newLi);
-            
-        };
-        var listContent = document.createElement('li');
-      listContent.textContent = 'Total: ' + this.totalCookies + ' cookies';
-      newLi.appendChild(listContent);
 
-    }
-
-//================================================================================
-
-var capitalHill = {
-    name: 'Capital Hill',
-    minCust: 20,
-    maxCust: 38,
-    aveSale: 2.3,
-    hourlyCust: [],
-    hourlyCookies: [],
-    totalCookies: 0,
-
-
-    
-};
-
-// console.log('done');
-
-capitalHill.hourlyCustAmm = function(){
-    for ( var i = 0; i < hours.length; i++){
-    var custEveryHour = Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
-    this.hourlyCust.push(custEveryHour)
-    }
-},
-
-capitalHill.hourlyCookiesAmm = function(){
-    this.hourlyCustAmm();
-    for ( var i = 0; i < hours.length; i++){
-        var oneHourCookies = Math.floor(this.hourlyCust[i] * this.aveSale)
-        this.hourlyCookies.push(oneHourCookies)
-        this.totalCookies += oneHourCookies;
-    }
-
-
+  function makeHeaderRow() {
+    var trEl = document.createElement('tr');
+  
+    var thEl = document.createElement('th');
+    thEl.className = ('storeTableNames');
+    thEl.textContent = allStores[i].name;
+    trEl.appendChild(thEl);
+  
+    // thEl = document.createElement('th');
+    // thEl.textContent = 'Hourly Customers';
+    // trEl.appendChild(thEl);
+  
+    // thEl = document.createElement('th');
+    // thEl.textContent = 'Hourly Cookie Sales';
+    // trEl.appendChild(thEl);
+  
+    storesTable.appendChild(trEl);
 }
-     capitalHill.render = function () {
-         
-        var storeName = document.getElementById('salesList')
-        var newH = document.createElement('li');
-        newH.className = ('storeName')
-        newH.textContent = this.name;
-        storeName.appendChild(newH)
-        
-        
-        var list = document.getElementById('salesList');
-         this.hourlyCookiesAmm();
-        var nameLi = document.createElement('li');
-        nameLi.textContent = this.name;
-         for ( var i = 0; i < this.hourlyCookies.length; i++){
-             var newLi = document.createElement('li');
-             newLi.textContent = hours[i] + '- ' + this.hourlyCookies[i] + ' cookies';
-             list.appendChild(newLi);
-            
-        };
-        var listContent = document.createElement('li');
-      listContent.textContent = 'Total: ' + this.totalCookies + ' cookies';
-      newLi.appendChild(listContent);
 
+
+// Store.prototype.renderName();
+//   renderAllStores();
+
+  for(var i in allStores){
+    makeHeaderRow();
+Store.prototype.header();
+      allStores[i].render()
     }
-
-capitalHill.hourlyCustAmm = function(){
-    for ( var i = 0; i < hours.length; i++){
-    var custEveryHour = Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
-    this.hourlyCust.push(custEveryHour)
-    }
-},
-
-capitalHill.hourlyCookiesAmm = function(){
-    this.hourlyCustAmm();
-    for ( var i = 0; i < hours.length; i++){
-        var oneHourCookies = Math.floor(this.hourlyCust[i] * this.aveSale)
-        this.hourlyCookies.push(oneHourCookies)
-        this.totalCookies += oneHourCookies;
-    }
+    console.table(allStores);
+  
+  
 
 
-}
-     capitalHill.render = function () {
-         
-        var storeName = document.getElementById('salesList')
-        var newH = document.createElement('li');
-        newH.className = ('storeName')
-        newH.textContent = this.name;
-        storeName.appendChild(newH)
-        
-        
-        var list = document.getElementById('salesList');
-         this.hourlyCookiesAmm();
-        var nameLi = document.createElement('li');
-        nameLi.textContent = this.name;
-         for ( var i = 0; i < this.hourlyCookies.length; i++){
-             var newLi = document.createElement('li');
-             newLi.textContent = hours[i] + '- ' + this.hourlyCookies[i] + ' cookies';
-             list.appendChild(newLi);
-            
-        };
-        var listContent = document.createElement('li');
-      listContent.textContent = 'Total: ' + this.totalCookies + ' cookies';
-      newLi.appendChild(listContent);
-
-    }
-
-//================================================================================
-
-var alki = {
-    name: 'Alki',
-    minCust: 2,
-    maxCust: 16,
-    aveSale: 4.6,
-    hourlyCust: [],
-    hourlyCookies: [],
-    totalCookies: 0,
 
 
-    
-};
-
-// console.log('done');
-
-alki.hourlyCustAmm = function(){
-    for ( var i = 0; i < hours.length; i++){
-    var custEveryHour = Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
-    this.hourlyCust.push(custEveryHour)
-    }
-},
-
-alki.hourlyCookiesAmm = function(){
-    this.hourlyCustAmm();
-    for ( var i = 0; i < hours.length; i++){
-        var oneHourCookies = Math.floor(this.hourlyCust[i] * this.aveSale)
-        this.hourlyCookies.push(oneHourCookies)
-        this.totalCookies += oneHourCookies;
-    }
 
 
-}
-     alki.render = function () {
-         
-        var storeName = document.getElementById('salesList')
-        var newH = document.createElement('li');
-        newH.className = ('storeName')
-        newH.textContent = this.name;
-        storeName.appendChild(newH)
-        
-        
-        var list = document.getElementById('salesList');
-         this.hourlyCookiesAmm();
-        var nameLi = document.createElement('li');
-        nameLi.textContent = this.name;
-         for ( var i = 0; i < this.hourlyCookies.length; i++){
-             var newLi = document.createElement('li');
-             newLi.textContent = hours[i] + '- ' + this.hourlyCookies[i] + ' cookies';
-             list.appendChild(newLi);
-            
-        };
-        var listContent = document.createElement('li');
-      listContent.textContent = 'Total: ' + this.totalCookies + ' cookies';
-      newLi.appendChild(listContent);
-
-    }
-
-alki.hourlyCustAmm = function(){
-    for ( var i = 0; i < hours.length; i++){
-    var custEveryHour = Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
-    this.hourlyCust.push(custEveryHour)
-    }
-},
-
-alki.hourlyCookiesAmm = function(){
-    this.hourlyCustAmm();
-    for ( var i = 0; i < hours.length; i++){
-        var oneHourCookies = Math.floor(this.hourlyCust[i] * this.aveSale)
-        this.hourlyCookies.push(oneHourCookies)
-        this.totalCookies += oneHourCookies;
-    }
 
 
-}
-     alki.render = function () {
-         
-        var storeName = document.getElementById('salesList')
-        var newH = document.createElement('li');
-        newH.className = ('storeName')
-        newH.textContent = this.name;
-        storeName.appendChild(newH)
-        
-        
-        var list = document.getElementById('salesList');
-         this.hourlyCookiesAmm();
-        var nameLi = document.createElement('li');
-        nameLi.textContent = this.name;
-         for ( var i = 0; i < this.hourlyCookies.length; i++){
-             var newLi = document.createElement('li');
-             newLi.textContent = hours[i] + '- ' + this.hourlyCookies[i] + ' cookies';
-             list.appendChild(newLi);
-            
-        };
-        var listContent = document.createElement('li');
-      listContent.textContent = 'Total: ' + this.totalCookies + ' cookies';
-      newLi.appendChild(listContent);
-
-    }
 
 
-//================================================================================
 
-// firstAndPike.hourlyCustAmm();
-// firstAndPike.hourlyCookiesAmm();
-firstAndPike.render();
-SeaTacAirport.render();
-seattleCenter.render();
-capitalHill.render();
-alki.render();
+
+
+
+
+
+
+//new stores
+
+// for(var i in allStores){
+//     console.log(allStores[i]);
+// }
