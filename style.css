@@ -1,3 +1,6 @@
+*{
+    cursor: url(img/salmon-cursor.png), auto;
+}
 body{
     background-color: bisque;
     font-family: serif;
@@ -34,6 +37,7 @@ body{
     list-style: disc;
     position: absolute;
     left: 70%;
+    top: 60%;
     display: block;
     font-size: 140%;
     font-family: 'Indie Flower', cursive;
@@ -104,4 +108,17 @@ ul {
     text-align: center;
     font-family: 'Indie Flower', cursive;
     font-size: 150%
+}
+
+#salesTable{
+    /* border: black dotted 1px */
+}
+
+table{
+    text-align: center;
+}
+td {
+    padding: 10px;
+    border: black solid 2px;
+    border-radius: 30px;
 }
