@@ -117,7 +117,7 @@ ul {
 }
 
 table{
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'IBM Plex Mono', monospacel;
 
     padding:300px;
     margin: auto;
@@ -139,4 +139,11 @@ tr{
     text-decoration: underline;
     /* position: absolute; */
     /* margin-left: 0px; */
+}
+
+#airPlane{
+    width: 20%;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
 }
