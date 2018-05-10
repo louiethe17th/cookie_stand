@@ -130,6 +130,7 @@ table{
 
     padding:300px;
     margin: auto;
+    margin-bottom: 200px;
 }
 td {
     padding: 10px;
@@ -168,4 +169,21 @@ tr{
 
 .tableHours{
     background-color: bisque;
+}
+
+fieldset{
+    margin: auto;
+    border: white outset 10px;
+    border-radius: 10px;
+    max-width: 250px;
+    background-color: #dddddd;
+    margin-top: 50px;
+}
+
+legend{
+    border: black solid 1px;
+    border-radius: 10px;
+    background-color: #dddddd;
+
+    
 }
