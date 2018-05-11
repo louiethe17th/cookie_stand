@@ -7,6 +7,8 @@ var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '
 //creates array to hold store names
 var allStores = [];
 
+var totalCookieArray = [];
+Store.all = [];
 
 //vars to hold html elements
 var newStoreForm = document.getElementById('new-store-form');
@@ -104,36 +106,73 @@ Store.prototype.renderName = function () {
   storeTable.appendChild(trEl);
 }
 
-//function to render all stores
-function renderAllStores() {
-  for (var i in allStores) {
-    allStores[i].render();
-  }
-}
 
 
 //render store names
-function makeHeaderRow() {
+Store.prototype.makeHeaderRow = function(){
   var trEl = document.createElement('tr');
-
+  
   var thEl = document.createElement('th');
   thEl.className = ('storeTableNames');
   thEl.textContent = allStores[i].name;
   trEl.appendChild(thEl);
-
+  
   storesTable.appendChild(trEl);
 }
 
+// Store.prototype.makeTotals = function(){
+//   var trEl = document.createElement('tr')
+//   var thEl = document.createElement('th');
 
-//render loop
-for (var i in allStores) {
-  makeHeaderRow();
-  Store.prototype.header();
-  allStores[i].render()
-}
+//   thEl.textContent = 'total cookies sales: ';
+//   trEl.appendChild(thEl)
+//   thEl = document.createElement('th');
+
+//   for( var i in hours]){
+//     thEl.textContent = allStores[0].cookieArray[j];
+//     trEl.appendChild(thEl)
+//     thEl = document.createElement('th')
+
+//   }
+
+
+// }
+
+
+Store.prototype.totalsTable = function(){
+  Store.totalCookieArray = [];
+  for(var j = -1; j < 14; j++){
+    var totalPerHour = 0;
+    for(var k in allStores){
+      totalPerHour = totalPerHour + allStores[k].cookieArray[j];
+      console.log(totalPerHour);
+    };
+    Store.totalCookieArray.push(totalPerHour);
+  };
+  var trEl = document.createElement('tr');
+  storesTable.appendChild(trEl);
+  for (var i in Store.totalCookieArray){
+    var tdEl = document.createElement('td');
+    if(i == 0){
+      tdEl.textContent = 'Total';
+    }else{
+      tdEl.textContent = Store.totalCookieArray[i];
+    };
+    trEl.appendChild(tdEl);
+  };
+};
+// render loop
+
+// function renderAllStores(){
+  for (var i in allStores) {
+    Store.prototype.makeHeaderRow();
+    Store.prototype.header();
+    allStores[i].render()
+  }
+  Store.prototype.totalsTable();
 console.table(allStores);
 
-
+// }
 
 //creating new store event
 function newStoreInput(event) {
