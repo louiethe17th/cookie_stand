@@ -121,6 +121,12 @@ ul {
     font-size: 150%
 }
 
+#aboutH {
+    text-align: center;
+    font-family: 'Indie Flower', cursive;
+    font-size: 150%
+}
+
 #salesTable{
     /* border: black dotted 1px */
 }
@@ -227,5 +233,17 @@ button{
     width:100%;
     transition:800ms ease all;
   }
-
   
+  .mySlides { 
+      border-radius: 30px;
+      width: 300px;
+      margin: auto
+      
+  }
+
+  #buttonLeft{
+      position: absolute;
+      width: 100px;
+      margin-left: 300px;
+      
+  }

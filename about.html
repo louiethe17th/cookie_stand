@@ -9,15 +9,14 @@
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Shadows+Into+Light|IBM+Plex+Mono" rel="stylesheet">
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
+    <script src="js/slideshow.js"></script>
 </head>
 
 <body>
 
     <img id="firstSalmon" src="img/salmon.png" alt="Ugly salmon">
     <!-- <img id="secondSalmon" src="img/salmon.png" alt="Ugly salmon"> -->
-    <p id="welcome">Welcome to Pats Salmon Cookies!</P>
-    <p id="introP">We make healthy, delicious, healthy cookies, using a micro-ground salmon paste. You wont even be able to tell there is
-        salmon in it!</p>
+    
     <img id="seattle" src="img/seattle-sketch-cropped.png" alt="seattle skyline">
     <img id="airPlane" src="img/airplane.png" alt="cute little plane">
     <ul id="navBar">
@@ -31,16 +30,17 @@
             <a href="sales.html">Sales Admin</a>
         </li>
     </ul>
-    <h1 id="storeH">Visit one of our many locations around Seattle!<br>
-                    All stores are open 7 days a week, 6am-8pm!</h1>
-    <ul id="storeUL">
-        <li class="storeLI">Pike Place Market</li>
-        <li class="storeLI">Sea Tac Airport</li>
-        <li class="storeLI">Capital Hill</li>
-        <li class="storeLI">Seattle Center</li>
-        <li class="storeLI">Alki Beach</li>
 
-    </ul>
+    <h2 id="aboutH">We are a family run company started by an Old man named Pat. Have fun flipping through some nice photos of cookies, families eating cookies and some fish.</h2>
+
+    
+    <img class="mySlides" src="img/family.jpg">
+    <img class="mySlides" src="img/frosted-cookie.jpg">
+    <img class="mySlides" src="img/fish.png">
+    <img class="mySlides" src="img/cutter.jpeg">
+    <img class="mySlides" src="img/shirt.jpg">
+    <button id="leftButton" onclick="plusDivs(-1)">&#10094;</button>
+    <button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095;</button>
 
 </body>
 
