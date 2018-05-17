@@ -24,6 +24,8 @@ function Store(name, minimumCustomer, maximumCustomer, aveSale) {
   this.cookieArray = [];
   this.totalCookies = 0;
 
+  this.totalForDay = 0;
+
 
   allStores.push(this);
 }
@@ -53,6 +55,12 @@ Store.prototype.header = function () {
     thEl = document.createElement('th');
   }
 
+  thEl.textContent = 'Totals';
+    trEl.appendChild(thEl);
+    thEl = document.createElement('th');
+
+    storesTable.appendChild(trEl);
+
   
 }
 // first math function
@@ -68,7 +76,7 @@ Store.prototype.cookPerHourFunct = function () {
   for (var j = 0; j < hours.length; j++) {
     var arrayTimesAvg = Math.floor(this.customerArray[j] * this.aveSale);
     this.cookieArray.push(arrayTimesAvg);
-    // this.totalForDay += arrayTimesAvg;
+    this.totalForDay += arrayTimesAvg;
   }
 }
 
