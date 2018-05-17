@@ -17,8 +17,8 @@ var storesTable = document.getElementById('salesTable');
 //creates empty object to hole store data
 function Store(name, minimumCustomer, maximumCustomer, aveSale) {
   this.name = name;
-  this.minimumCustomer = minimumCustomer;
-  this.maximumCustomer = maximumCustomer;
+  this.minCust = minimumCustomer;
+  this.maxCust = maximumCustomer;
   this.aveSale = aveSale;
   this.customerArray = [];
   this.cookieArray = [];
@@ -36,44 +36,43 @@ new Store('Capital Hill', 20, 38, 2.3);
 new Store('Alki', 2, 16, 4.6);
 
 
-//========================================= Calc functions
-
-Store.prototype.custPerHourFunct = function () {
-  for (var i = 0; i < hours.length; i++) {
-    var random = Math.floor(Math.random() * (this.maximumCustomer - this.minimumCustomer + 1)) + this.minimumCustomer;
-    console.log(random);
-    this.customerArray.push(random);
-  }
-}
-
-Store.prototype.cookPerHourFunct = function () {
-  this.custPerHourFunct();
-  for (var j = 0; j < hours.length; j++) {
-    var arrayTimesAvg = Math.floor(this.customerArray[j] * this.aveSale);
-    this.cookieArray.push(arrayTimesAvg);
-    this.totalCookies += arrayTimesAvg;
-  }
-}
-
-// ====================================== Render Functions
-
-//render hours
 Store.prototype.header = function () {
 
   var trEl = document.createElement('tr');
+  trEl.className = ('tableNumbers');
+
   var thEl = document.createElement('th');
 
+  thEl.textContent = 'Store Names';
+  trEl.appendChild(thEl);
+  thEl = document.createElement('th');
+
   for (var i in hours) {
-    thEl.className = ('tableHours');
     thEl.textContent = hours[i];
     trEl.appendChild(thEl);
     thEl = document.createElement('th');
   }
 
-  storesTable.appendChild(trEl);
+  
+}
+// first math function
+Store.prototype.custPerHourFunct = function () {
+  for (var i = 0; i < hours.length; i++) {
+    var random = Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust;
+    this.customerArray.push(random);
+  }
+}
+// second math function
+Store.prototype.cookPerHourFunct = function () {
+  this.custPerHourFunct();
+  for (var j = 0; j < hours.length; j++) {
+    var arrayTimesAvg = Math.floor(this.customerArray[j] * this.aveSale);
+    this.cookieArray.push(arrayTimesAvg);
+    // this.totalForDay += arrayTimesAvg;
+  }
 }
 
-//render cookie sales
+// Body of table (cookies per hour)
 Store.prototype.render = function () {
   this.cookPerHourFunct();
 
@@ -81,100 +80,68 @@ Store.prototype.render = function () {
   trEl.className = ('tableNumbers');
   var tdEl = document.createElement('td');
 
-
-  for (var i in hours) {
-    tdEl.textContent = this.cookieArray[i];
-    trEl.appendChild(tdEl);
-    tdEl = document.createElement('td')
-  }
-
-  storesTable.appendChild(trEl);
-}
-
-//render store names
-Store.prototype.renderName = function () {
-  this.cookPerHourFunct();
-
-  var trEl = document.createElement('tr');
-  var tdEl = document.createElement('td');
-
   tdEl.textContent = this.name;
   trEl.appendChild(tdEl);
   tdEl = document.createElement('td');
 
-
-  storeTable.appendChild(trEl);
-}
-
-
-
-//render store names
-Store.prototype.makeHeaderRow = function(){
-  var trEl = document.createElement('tr');
-  
-  var thEl = document.createElement('th');
-  thEl.className = ('storeTableNames');
-  thEl.textContent = allStores[i].name;
-  trEl.appendChild(thEl);
-  
-  storesTable.appendChild(trEl);
-}
-
-// Store.prototype.makeTotals = function(){
-//   var trEl = document.createElement('tr')
-//   var thEl = document.createElement('th');
-
-//   thEl.textContent = 'total cookies sales: ';
-//   trEl.appendChild(thEl)
-//   thEl = document.createElement('th');
-
-//   for( var i in hours]){
-//     thEl.textContent = allStores[0].cookieArray[j];
-//     trEl.appendChild(thEl)
-//     thEl = document.createElement('th')
-
-//   }
-
-
-// }
-
-
-Store.prototype.totalsTable = function(){
-  Store.totalCookieArray = [];
-  for(var j = -1; j < 14; j++){
-    var totalPerHour = 0;
-    for(var k in allStores){
-      totalPerHour = totalPerHour + allStores[k].cookieArray[j];
-      console.log(totalPerHour);
-    };
-    Store.totalCookieArray.push(totalPerHour);
-  };
-  var trEl = document.createElement('tr');
-  storesTable.appendChild(trEl);
-  for (var i in Store.totalCookieArray){
-    var tdEl = document.createElement('td');
-    if(i == 0){
-      tdEl.textContent = 'Total';
-    }else{
-      tdEl.textContent = Store.totalCookieArray[i];
-    };
+  for (var i in hours) {
+    tdEl.textContent = this.cookieArray[i];
     trEl.appendChild(tdEl);
-  };
-};
-// render loop
-
-// function renderAllStores(){
-  for (var i in allStores) {
-    Store.prototype.makeHeaderRow();
-    Store.prototype.header();
-    allStores[i].render()
+    tdEl = document.createElement('td');
   }
-  Store.prototype.totalsTable();
+
+  tdEl.textContent = this.totalForDay;
+  trEl.appendChild(tdEl);
+  tdEl = document.createElement('td');
+
+  //========================================
+  Store.prototype.footer = function () {
+    var trEl2 = document.createElement('tr');
+    trEl2.className = ('tableNumbers');
+    var thEl2 = document.createElement('th');
+
+
+    thEl2.textContent = 'Total: ';
+    trEl2.appendChild(thEl2);
+    thEl2 = document.createElement('th');
+
+    for (var j in allStores[0].cookieArray) {
+      thEl2.textContent = allStores[0].cookieArray[j];
+
+      trEl2.appendChild(thEl2);
+      thEl2 = document.createElement('th');
+    }
+
+
+
+    storesTable.appendChild(trEl2);
+  }
+  //========================================
+
+
+  storesTable.appendChild(trEl);
+}
+
+function renderAllStores() {
+  storesTable.innerHTML = '';
+  Store.prototype.header();
+  console.table(allStores);
+
+  for (var i in allStores) {
+    allStores[i].render();
+  }
+}
+
+renderAllStores();
+
+Store.prototype.footer();
+
 console.table(allStores);
 
-// }
 
-//creating new store event
+
+//===================================================
+
 function newStoreInput(event) {
   console.log("Submit buttton was clicked!")
   event.preventDefault();
@@ -199,84 +166,14 @@ function newStoreInput(event) {
   var newCookieStore = new Store(newStoreName, newStoreMinCust, newStoreMaxCust, newStoreAvg)
 
   console.log(newCookieStore);
+  renderAllStores();
 
-  var header = function () {
-
-    var trEl = document.createElement('tr');
-    var thEl = document.createElement('th');
-
-    for (var i in hours) {
-      thEl.className = ('tableHours');
-      thEl.textContent = hours[i];
-      trEl.appendChild(thEl);
-      thEl = document.createElement('th');
-    }
-
-    storesTable.appendChild(trEl);
-  }
-
-  var custPerHourFunct = function () {
-    for (var i = 0; i < hours.length; i++) {
-      var random = Math.floor(Math.random() * (newCookieStore.maximumCustomer - newCookieStore.minimumCustomer + 1)) + newCookieStore.minimumCustomer;
-      console.log(random);
-      newCookieStore.customerArray.push(random);
-
-    }
-  }
-
-  var cookPerHourFunct = function () {
-    custPerHourFunct();
-    for (var j = 0; j < hours.length; j++) {
-      var arrayTimesAvg = Math.floor(newCookieStore.customerArray[j] * newCookieStore.aveSale);
-      newCookieStore.cookieArray.push(arrayTimesAvg);
-      newCookieStore.totalCookies += arrayTimesAvg;
-    }
-
-  }
-
-
-  var renderNewStoreName = function () {
-    var trEl = document.createElement('tr');
-
-    var thEl = document.createElement('th');
-    thEl.className = ('storeTableNames');
-    thEl.textContent = newCookieStore.name;
-    trEl.appendChild(thEl);
-
-    storesTable.appendChild(trEl);
-
-  }
-
-  var renderNewStoreCookies = function () {
-    cookPerHourFunct();
-
-    var trEl = document.createElement('tr');
-    trEl.className = ('tableNumbers');
-    var tdEl = document.createElement('td');
-
-
-    for (var i in hours) {
-      tdEl.textContent = newCookieStore.cookieArray[i];
-      trEl.appendChild(tdEl);
-      tdEl = document.createElement('td')
-    }
-
-    storesTable.appendChild(trEl);
-  }
-
-
-
-  renderNewStoreName();
-
-  header();
-
-  renderNewStoreCookies();
-
-
+  Store.prototype.footer();
 }
 
-
 newStoreForm.addEventListener('submit', newStoreInput)
+console.table(allStores);
+
 
 
 
